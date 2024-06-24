@@ -38,7 +38,7 @@ const useSpeech = (sentences: Array<string>) => {
         setPlaybackState(state);
       },
     });
-    setEngine(engine);
+    setEngine(speechEngine);
     speechEngine.load(sentences[currentSentenceIdx]);
 
     return () => {
