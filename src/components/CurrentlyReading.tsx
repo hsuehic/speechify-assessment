@@ -16,5 +16,16 @@ export const CurrentlyReading = ({
   currentSentenceIdx: number;
   sentences: string[];
 }) => {
-  return <div data-testid="currently-reading"></div>;
+  const [start, end] = currentWordRange;
+  return <div data-testid="currently-reading">
+    {
+      sentences.map((s, index) => {
+        if (index === currentSentenceIdx) {
+          return <p data-testid="current-sentence">{s.substring(0,start)}<span style={{ color: 'red'}} data-testid="current-word">{s.substring(start, end)}</span>{s.substring(end)}</p>
+        } else {
+          return <p>{s}</p>
+        }
+      })
+    }
+  </div>;
 };

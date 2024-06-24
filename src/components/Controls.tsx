@@ -17,5 +17,9 @@ export const Controls = ({
   loadNewContent: () => void;
   state: PlayingState;
 }) => {
-  return <div></div>;
+  return <div>
+    <button data-testid="action-play" onClick={() => {play(); }}>Play</button>
+    <button data-testid="action-pause" onClick={() => { pause(); }}>Pause</button>
+    <button data-testid="action-loadcontent" onClick={() => { loadNewContent();}}>Load new content</button>
+  </div>;
 };
