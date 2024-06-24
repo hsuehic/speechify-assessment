@@ -59,6 +59,10 @@ const useSpeech = (sentences: Array<string>) => {
     }
   };
 
+  const setSentences = (ss: string[]) => {
+    setSentences(ss);
+  }
+
 
   return {
     currentSentenceIdx,
@@ -66,6 +70,7 @@ const useSpeech = (sentences: Array<string>) => {
     playbackState,
     play,
     pause,
+    setSentences,
   };
 };
 
