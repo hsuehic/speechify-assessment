@@ -32,6 +32,7 @@ const useSpeech = (sentences: Array<string>) => {
         if (next < sentences.length) {
           setCurrentSentenceIdx(next);
           speechEngine.load(sentences[next]);
+          speechEngine.play();
         }
       },
       onStateUpdate: (state: PlayingState) => {
