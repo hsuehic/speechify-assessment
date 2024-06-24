@@ -60,6 +60,8 @@ const useSpeech = (sentences: Array<string>) => {
   };
 
   const setSentences = (ss: string[]) => {
+    setCurrentSentenceIdx(0);
+    setCurrentWordRange([0, 0]);
     setSentences(ss);
   }
 
