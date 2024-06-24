@@ -15,14 +15,12 @@ function App() {
     playbackState,
     play,
     pause,
-    setSentences: setSpeechSentences,
   } = useSpeech(sentences);
 
   useEffect(() => {
     fetchContent().then((ssml) => {
       const ss = parseContentIntoSentences(ssml);
       setSentences(ss);
-      setSpeechSentences(ss);
     });
   }, []);
 
@@ -37,7 +35,6 @@ function App() {
           fetchContent().then((ssml) => {
             const ss = parseContentIntoSentences(ssml);
             setSentences(ss);
-            setSpeechSentences(ss);
           });
         }} state={playbackState} />
       </div>

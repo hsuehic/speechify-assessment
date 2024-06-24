@@ -18,8 +18,10 @@ const useSpeech = (sentences: Array<string>) => {
 
   const [engine, setEngine] = useState<SpeechEngine | undefined>(undefined);
 
+  let currentIndex = currentSentenceIdx;
 
   useEffect(() => {
+    currentIndex = 0;
     const speechEngine = createSpeechEngine({
       onBoundary: (e: SpeechSynthesisEvent) => {
         console.log(e);
@@ -28,10 +30,13 @@ const useSpeech = (sentences: Array<string>) => {
       },
       onEnd: (e: SpeechSynthesisEvent) => {
         console.log(e);
-        const next = currentSentenceIdx + 1; 
-        if (next < sentences.length) {
-          setCurrentSentenceIdx(next);
-          speechEngine.load(sentences[next]);
+        console.log(currentSentenceIdx + 1);
+        console.log(sentences);
+        currentIndex ++;
+
+        if (currentIndex < sentences.length) { 
+          setCurrentSentenceIdx(currentIndex);
+          speechEngine.load(sentences[currentIndex]);
           speechEngine.play();
         }
       },
@@ -40,7 +45,9 @@ const useSpeech = (sentences: Array<string>) => {
       },
     });
     setEngine(speechEngine);
-    speechEngine.load(sentences[currentSentenceIdx]);
+    setCurrentSentenceIdx(currentIndex);
+    setCurrentWordRange([0, 0]);
+    speechEngine.load(sentences[currentIndex]);
 
     return () => {
       if (engine) {
@@ -60,20 +67,12 @@ const useSpeech = (sentences: Array<string>) => {
     }
   };
 
-  const setSentences = (ss: string[]) => {
-    setCurrentSentenceIdx(0);
-    setCurrentWordRange([0, 0]);
-    setSentences(ss);
-  }
-
-
   return {
     currentSentenceIdx,
     currentWordRange,
     playbackState,
     play,
     pause,
-    setSentences,
   };
 };
 
