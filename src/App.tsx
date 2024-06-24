@@ -1,6 +1,6 @@
 import './App.css';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Controls } from './components/Controls';
 import { CurrentlyReading } from './components/CurrentlyReading';
@@ -17,6 +17,13 @@ function App() {
     pause
   } = useSpeech(sentences);
 
+  useEffect(() => {
+    fetchContent().then((ssml) => {
+      const ss = parseContentIntoSentences(ssml);
+      setSentences(ss);
+    });
+  }, []);
+
   return (
     <div className="App">
       <h1>Text to speech</h1>
@@ -28,7 +35,7 @@ function App() {
           fetchContent().then((ssml) => {
             const ss = parseContentIntoSentences(ssml);
             setSentences(ss);
-          })
+          });
         }} state={playbackState} />
       </div>
     </div>

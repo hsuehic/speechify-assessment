@@ -21,9 +21,9 @@ export const CurrentlyReading = ({
     {
       sentences.map((s, index) => {
         if (index === currentSentenceIdx) {
-          return <p data-testid="current-sentence">{s.substring(0,start)}<span style={{ color: 'red'}} data-testid="current-word">{s.substring(start, end)}</span>{s.substring(end)}</p>
+          return <p key={`sentence-${index}`} data-testid="current-sentence">{s.substring(0,start)}<span style={{ color: 'red'}} data-testid="current-word">{s.substring(start, end)}</span>{s.substring(end)}</p>
         } else {
-          return <p>{s}</p>
+          return <p key={`sentence-${index}`}>{s}</p>
         }
       })
     }
