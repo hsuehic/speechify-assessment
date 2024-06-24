@@ -17,15 +17,14 @@ export const CurrentlyReading = ({
   sentences: string[];
 }) => {
   const [start, end] = currentWordRange;
-  return <div data-testid="currently-reading">
-    {
-      sentences.map((s, index) => {
-        if (index === currentSentenceIdx) {
-          return <p key={`sentence-${index}`} data-testid="current-sentence">{s.substring(0,start)}<span style={{ color: 'red'}} data-testid="current-word">{s.substring(start, end)}</span>{s.substring(end)}</p>
-        } else {
-          return <p key={`sentence-${index}`}>{s}</p>
-        }
-      })
-    }
-  </div>;
+  const s = sentences[currentSentenceIdx];
+  if (sentences && sentences.length > currentSentenceIdx && s) {
+    return <><div style={{ fontWeight: "bolder"}} data-testid="currently-reading">
+      <p data-testid="current-sentence">{s.substring(0,start)}<span style={{ color: 'red'}} data-testid="current-word">{s.substring(start, end)}</span>{s.substring(end)}</p>
+    </div>
+    <div data-testid="all-sentences">{sentences.join("")}</div>
+    </>;
+  } else {
+    return null;
+  }
 };
